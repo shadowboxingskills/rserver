@@ -25,20 +25,17 @@ randomplot <- function(n, dist=c("normal", "uniform")){
 usethis::use_package("mlbench")
 usethis::use_package("caret")
 usethis::use_package("lattice")
-usethis::use_package("caTools")
 
 #' Multiple Regression example using Boston housing dataset
 #'
 #' This function creates a multiple regression model trained with the Boston housing dataset.
 #'
 #' @export
-#' @param n numer of random values
 #' @param features one of "normal" or "uniform".
-regression_model <- function(n, features){
+regression_model <- function(features){
   require(mlbench)
   require(caret)
   require(lattice)
-  # require(caTools)
 
   data(BostonHousing)
 
@@ -58,21 +55,19 @@ regression_model <- function(n, features){
   # - MEDV     Median value of owner-occupied homes in $1000's
 
   df <- BostonHousing
-  # str(df)
-  # regVar <- c("age", "lstat", "tax")
   # regVar <- c("crim", "zn", "indus", "nox" ,"rm", "age", "dis", "rad", "tax", "ptratio", "b", "lstat") # chas categorical
+
   # remove chas from features list since it is categorical
   if ( "chas" %in% features ) {
     regVar <- features[!(features %in% "chas")]
   } else {
     regVar <- features
   }
+  # str(df[, regVar])
 
   N_features <- length(regVar)
   layout_cols <- ifelse( N_features < 3, N_features, 3)
   layout_rows <- ceiling( N_features / 3)
-
-  # str(df[, regVar])
 
   theme1 <- lattice::trellis.par.get()
   theme1$plot.symbol$col = rgb(.2, .2, .2, .4)
@@ -88,32 +83,6 @@ regression_model <- function(n, features){
               layout = c(layout_cols, layout_rows)
               )
   print(p)
-
-  # N_features <- dim(df)[2] - 1 # total number of features
-  # all_features <- colnames(df)
-
-  # #input validation
-  # #features <- match.arg(dist, several.ok = T)
-  # stopifnot(length(features) > 0)
-  # stopifnot(length(features) < N_features)
-  # stopifnot(features %in% all_features)
-
-  # message <- paste0("dist=", paste(features, ' '), "/ ",
-  #                   "length=", length(features))
-  #
-  # if ( length(features) == 1 ) {
-  #   if(features == "normal"){
-  #     graphics::hist(stats::rnorm(n), main=message)
-  #   }
-  #
-  #   if(features == "uniform"){
-  #     graphics::hist(stats::runif(n), main=message)
-  #   }
-  # } else {
-  #   if ( (features[1] == "uniform") && (features[2] == "normal") ) {
-  #     graphics::hist(stats::rnorm(n), main=message)
-  #   }
-  # }
 
   #return nothing
   invisible();
