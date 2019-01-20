@@ -11,18 +11,18 @@ randomplot <- function(n, dist=c("normal", "uniform")){
   stopifnot(n < 1e6)
 
   if(dist == "normal"){
-    hist(rnorm(n), main="SG")
+    graphics::hist(stats::rnorm(n), main="SG")
   }
 
   if(dist == "uniform"){
-    hist(runif(n))
+    graphics::hist(stats::runif(n))
   }
 
   #return nothing
   invisible();
 }
 
-install.packages("caTools", repos = "http://cran.us.r-project.org")
+usethis::use_package("caTools")
 
 #' Multiple Regression example using Boston housing dataset
 #'
@@ -32,18 +32,18 @@ install.packages("caTools", repos = "http://cran.us.r-project.org")
 #' @param n numer of random values
 #' @param dist one of "normal" or "uniform".
 regression_model <- function(n, dist=c("normal", "uniform")){
-  require(caTools)
+  #require(caTools)
 
   #input validation
   dist <- match.arg(dist)
   stopifnot(n < 1e6)
 
   if(dist == "normal"){
-    hist(rnorm(n), main="SG")
+    graphics::hist(stats::rnorm(n), main="SG")
   }
 
   if(dist == "uniform"){
-    hist(runif(n))
+    graphics::hist(stats::runif(n))
   }
 
   #return nothing
