@@ -33,9 +33,9 @@ usethis::use_package("lattice")
 #' @export
 #' @param features one of "normal" or "uniform".
 regression_model <- function(features){
-  require(mlbench, quietly = F, warn.conflicts = F) # for BostonHousing data
-  require(caret, quietly = F, warn.conflicts = F)
-  require(lattice, quietly = F, warn.conflicts = F)
+  require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
+  require(caret, quietly = T, warn.conflicts = T)
+  require(lattice, quietly = T, warn.conflicts = T)
 
   data(BostonHousing)
 
@@ -98,8 +98,8 @@ usethis::use_package("corrplot")
 #' @export
 #' @param features one of "normal" or "uniform".
 regression_model_correlation_plot <- function(features){
-  require(mlbench, quietly = F, warn.conflicts = F) # for BostonHousing data
-  require(corrplot, quietly = F, warn.conflicts = F) # for corrplot
+  require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
+  require(corrplot, quietly = T, warn.conflicts = T) # for corrplot
 
   data(BostonHousing)
   df <- BostonHousing
@@ -131,9 +131,9 @@ usethis::use_package("dplyr")
 #' @export
 #' @param features one of "normal" or "uniform".
 regression_model_training <- function(features){
-  require(mlbench, quietly = F, warn.conflicts = F) # for BostonHousing data
-  require(caTools, quietly = F, warn.conflicts = F) # for sample.split
-  # require(dplyr, quietly = F, warn.conflicts = F) # for select
+  require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
+  require(caTools, quietly = T, warn.conflicts = T) # for sample.split
+  # require(dplyr, quietly = T, warn.conflicts = T) # for select
 
   data(BostonHousing)
   df <- BostonHousing
@@ -168,9 +168,9 @@ regression_model_training <- function(features){
 #' @export
 #' @param features one of "normal" or "uniform".
 regression_model_plot_residuals <- function(features){
-  require(mlbench, quietly = F, warn.conflicts = F) # for BostonHousing data
-  require(caTools, quietly = F, warn.conflicts = F) # for sample.split
-  require(dplyr, quietly = F, warn.conflicts = F) # for select
+  require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
+  require(caTools, quietly = T, warn.conflicts = T) # for sample.split
+  # require(dplyr, quietly = T, warn.conflicts = T) # for select
 
   data(BostonHousing)
   df <- BostonHousing
