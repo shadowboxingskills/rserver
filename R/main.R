@@ -235,8 +235,9 @@ regression_model_plot_residuals_distribution <- function(features){
   residuals <- residuals(model)
   residuals <- as.data.frame(residuals)
 
-  ggplot2::ggplot( residuals, aes(residuals) ) +
+  g <- ggplot2::ggplot( residuals, aes(residuals) ) +
     ggplot2::geom_histogram( fill='red', alpha=0.4, binwidth=1 )
+  print(g)
 
   #return nothing
   invisible();
