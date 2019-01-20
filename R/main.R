@@ -157,8 +157,8 @@ regression_model_training <- function(features){
   model <- stats::lm(formula = f , data = train)
   summary(model)
 
-  #return nothing
-  invisible();
+  # return nothing
+  # invisible();
 }
 
 #' Multiple Regression example using Boston housing dataset
