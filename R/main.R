@@ -33,9 +33,9 @@ usethis::use_package("lattice")
 #' @export
 #' @param features one of "normal" or "uniform".
 regression_model <- function(features){
-  require(mlbench) # for BostonHousing data
-  require(caret)
-  require(lattice)
+  require(mlbench, quietly = F, warn.conflicts = F) # for BostonHousing data
+  require(caret, quietly = F, warn.conflicts = F)
+  require(lattice, quietly = F, warn.conflicts = F)
 
   data(BostonHousing)
 
@@ -98,8 +98,8 @@ usethis::use_package("corrplot")
 #' @export
 #' @param features one of "normal" or "uniform".
 regression_model_correlation_plot <- function(features){
-  require(mlbench) # for BostonHousing data
-  require(corrplot) # for corrplot
+  require(mlbench, quietly = F, warn.conflicts = F) # for BostonHousing data
+  require(corrplot, quietly = F, warn.conflicts = F) # for corrplot
 
   data(BostonHousing)
   df <- BostonHousing
@@ -133,7 +133,7 @@ usethis::use_package("dplyr")
 regression_model_training <- function(features){
   require(mlbench, quietly = F, warn.conflicts = F) # for BostonHousing data
   require(caTools, quietly = F, warn.conflicts = F) # for sample.split
-  require(dplyr, quietly = F, warn.conflicts = F) # for select
+  # require(dplyr, quietly = F, warn.conflicts = F) # for select
 
   data(BostonHousing)
   df <- BostonHousing
@@ -158,7 +158,7 @@ regression_model_training <- function(features){
   print(summary(model))
 
   # return nothing
-  # invisible();
+  invisible();
 }
 
 #' Multiple Regression example using Boston housing dataset
@@ -168,9 +168,9 @@ regression_model_training <- function(features){
 #' @export
 #' @param features one of "normal" or "uniform".
 regression_model_plot_residuals <- function(features){
-  require(mlbench) # for BostonHousing data
-  require(caTools) # for sample.split
-  require(dplyr) # for select
+  require(mlbench, quietly = F, warn.conflicts = F) # for BostonHousing data
+  require(caTools, quietly = F, warn.conflicts = F) # for sample.split
+  require(dplyr, quietly = F, warn.conflicts = F) # for select
 
   data(BostonHousing)
   df <- BostonHousing
