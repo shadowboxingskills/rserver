@@ -237,7 +237,8 @@ regression_model_plot_residuals_distribution <- function(features){
   residuals <- as.data.frame(residuals)
 
   g <- ggplot2::ggplot( residuals, aes(residuals) ) +
-    ggplot2::geom_histogram( fill='red', alpha=0.4, binwidth=1 )
+    ggplot2::geom_histogram( fill='red', alpha=0.4, binwidth=1 ) +
+    ggplot2::theme_light()
   print(g)
 
   #return nothing
@@ -287,7 +288,7 @@ regression_model_predict <- function(features){
       ggplot2::geom_point( alpha=0.4, show.legend=F ) +
       ggplot2::geom_smooth( show.legend=F ) +
       ggplot2::xlab('Actual Prices') +
-      ggplot2::ylab('Predicted Prices')+
+      ggplot2::ylab('Predicted Prices') +
       ggplot2::theme_light()
 
   m <- plotly::ggplotly(p)
