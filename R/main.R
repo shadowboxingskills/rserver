@@ -287,11 +287,11 @@ regression_model_predict <- function(features){
       ggplot2::ylab('Predicted value of medv')+
       ggplot2::theme_bw()
 
-  g <- plotly::ggplotly(p)
-  print(g)
+  plotly::ggplotly(p)
+  # print(g)
 
   #return nothing
-  invisible();
+  # invisible();
 }
 
 
