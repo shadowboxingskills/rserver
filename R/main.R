@@ -52,12 +52,14 @@ regression_model <- function(n, features){
   theme1$plot.line$col = rgb(1, 0, 0, .7)
   theme1$plot.line$lwd <- 2
   lattice::trellis.par.set(theme1)
-  caret::featurePlot(x = df[, regVar],
+  p <- caret::featurePlot(x = df[, regVar],
               y = df$medv,
               plot = "scatter",
               type = c("p", "smooth"),
               span = .5,
               layout = c(3, 1))
+
+  plot(p)
 
   # N_features <- dim(df)[2] - 1 # total number of features
   # all_features <- colnames(df)
@@ -86,7 +88,7 @@ regression_model <- function(n, features){
   # }
 
   #return nothing
-  # invisible();
+  invisible();
 }
 
 
