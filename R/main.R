@@ -58,8 +58,7 @@ regression_model <- function(n, features){
               type = c("p", "smooth"),
               span = .5,
               layout = c(3, 1))
-
-  plot(p)
+  print(p)
 
   # N_features <- dim(df)[2] - 1 # total number of features
   # all_features <- colnames(df)
