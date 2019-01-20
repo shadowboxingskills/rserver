@@ -133,7 +133,6 @@ usethis::use_package("dplyr")
 regression_model_training <- function(features){
   require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
   require(caTools, quietly = T, warn.conflicts = T) # for sample.split
-  # require(dplyr, quietly = T, warn.conflicts = T) # for select
 
   data(BostonHousing)
   df <- BostonHousing
@@ -302,7 +301,7 @@ regression_model_predict <- function(features){
 #'
 #' @export
 #' @param features one of "normal" or "uniform".
-regression_model_RMSE <- function(features){
+regression_model_RMSD <- function(features){
   require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
   require(caTools, quietly = T, warn.conflicts = T) # for sample.split
 
@@ -319,17 +318,18 @@ regression_model_RMSE <- function(features){
   test <- base::subset(df, msk==F)
 
   f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
-  # f <- "medv ~ ."
+  f <- "medv ~ ."
   model <- stats::lm(formula = f , data = train)
 
   test$predicted.medv <- stats::predict(model, test)
 
-  error <- test$medvv - test$predicted.medv
+  error <- test$medv - test$predicted.medv
 
-  # calculate the model Root Mean Square Error (RMSE)
-  rmse <- sqrt( mean(error)^2 )
+  # calculate the model Root Mean Square Error (RMSD)
+  mse <- mean(error)^2
+  rmsd <- sqrt( mse )
 
-  print( rmse )
+  print( round(rmsd, 2) )
 
   #return nothing
   invisible();
