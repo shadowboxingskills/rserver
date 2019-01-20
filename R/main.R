@@ -33,7 +33,7 @@ usethis::use_package("lattice")
 #' @export
 #' @param features one of "normal" or "uniform".
 regression_model <- function(features){
-  require(mlbench)
+  require(mlbench) # for BostonHousing data
   require(caret)
   require(lattice)
 
@@ -88,4 +88,34 @@ regression_model <- function(features){
   invisible();
 }
 
+
+usethis::use_package("corrplot")
+
+#' Multiple Regression example using Boston housing dataset
+#'
+#' This function creates a multiple regression model trained with the Boston housing dataset.
+#'
+#' @export
+#' @param features one of "normal" or "uniform".
+regression_model_correlation_plot <- function(features){
+  require(mlbench) # for BostonHousing data
+  require(corrplot) # for corrplot
+
+  data(BostonHousing)
+  df <- BostonHousing
+
+  # remove chas from features list since it is categorical
+  if ( "chas" %in% features ) {
+    regVar <- features[!(features %in% "chas")]
+  } else {
+    regVar <- features
+  }
+  regVar <- c(regVar, "medv")
+  x = df[, regVar]
+
+  corrplot::corrplot( stats::cor(x) )
+
+  #return nothing
+  invisible();
+}
 

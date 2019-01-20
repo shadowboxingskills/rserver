@@ -14,4 +14,6 @@ Imports:
     caTools,
     mlbench,
     caret,
-    lattice
+    lattice,
+    corrplot,
+    dplyr
