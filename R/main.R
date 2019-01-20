@@ -170,7 +170,6 @@ regression_model_training <- function(features){
 regression_model_plot_residuals <- function(features){
   require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
   require(caTools, quietly = T, warn.conflicts = T) # for sample.split
-  # require(dplyr, quietly = T, warn.conflicts = T) # for select
 
   data(BostonHousing)
   df <- BostonHousing
@@ -318,7 +317,7 @@ regression_model_RMSD <- function(features){
   test <- base::subset(df, msk==F)
 
   f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
-  f <- "medv ~ ."
+  # f <- "medv ~ ."
   model <- stats::lm(formula = f , data = train)
 
   test$predicted.medv <- stats::predict(model, test)
