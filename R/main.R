@@ -131,9 +131,9 @@ usethis::use_package("dplyr")
 #' @export
 #' @param features one of "normal" or "uniform".
 regression_model_training <- function(features){
-  require(mlbench) # for BostonHousing data
-  require(caTools) # for sample.split
-  require(dplyr) # for select
+  require(mlbench, quietly = F, warn.conflicts = F) # for BostonHousing data
+  require(caTools, quietly = F, warn.conflicts = F) # for sample.split
+  require(dplyr, quietly = F, warn.conflicts = F) # for select
 
   data(BostonHousing)
   df <- BostonHousing
