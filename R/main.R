@@ -68,7 +68,9 @@ regression_model <- function(n, features){
     regVar <- features
   }
 
-  layout_rows <- ceiling( length(regVar) / 3)
+  N_features <- length(regVar)
+  layout_cols <- ifelse( N_features < 3, N_features, 3)
+  layout_rows <- ceiling( N_features / 3)
 
   # str(df[, regVar])
 
@@ -83,7 +85,7 @@ regression_model <- function(n, features){
               plot = "scatter",
               type = c("p", "smooth"),
               span = .5,
-              layout = c(3, layout_rows)
+              layout = c(layout_cols, layout_rows)
               )
   print(p)
 
