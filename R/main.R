@@ -42,12 +42,17 @@ regression_model <- function(n, dist=c("normal", "uniform", "uniform,normal")){
     graphics::hist(stats::rnorm(n), main="uniform + normal")
   }
 
+  message <- paste0("dist = ", dist, ". ",
+                    "dist[1] = ", dist[1], ". ",
+                    "dist[2] = ", dist[2], ". ",
+                    "length(dist) = ", dist)
+
   if(dist == "normal"){
-    graphics::hist(stats::rnorm(n), main=dist)
+    graphics::hist(stats::rnorm(n), main=message)
   }
 
   if(dist == "uniform"){
-    graphics::hist(stats::runif(n), main=dist)
+    graphics::hist(stats::runif(n), main=message)
   }
 
   #return nothing
