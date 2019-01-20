@@ -43,16 +43,20 @@ regression_model <- function(n, dist){
                     "dist[2] = ", dist[2], ". ",
                     "length(dist) = ", length(dist))
 
-  if ( (dist[1] == "uniform") && (dist[2] == "normal") ) {
-    graphics::hist(stats::rnorm(n), main="uniform + normal")
-  }
+  if ( length(dist) == 1 ) {
+    if(dist == "normal"){
+      graphics::hist(stats::rnorm(n), main=message)
+    }
 
-  if(dist == "normal"){
-    graphics::hist(stats::rnorm(n), main=message)
-  }
-
-  if(dist == "uniform"){
-    graphics::hist(stats::runif(n), main=message)
+    if(dist == "uniform"){
+      graphics::hist(stats::runif(n), main=message)
+    }
+  } else {
+    if ( (dist[1] == "uniform") && (dist[2] == "normal") ) {
+      graphics::hist(stats::rnorm(n), main="uniform + normal")
+    } else {
+      graphics::hist(stats::rnorm(n), main=paste0("ERROR", message))
+    }
   }
 
   #return nothing
