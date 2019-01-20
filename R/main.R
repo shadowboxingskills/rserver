@@ -35,7 +35,7 @@ regression_model <- function(n, dist=c("normal", "uniform")){
   #require(caTools)
 
   #input validation
-  dist <- match.arg(dist)
+  dist <- match.arg(dist, several.ok = T)
   stopifnot(n < 1e6)
 
   if( (dist == c("normal", "uniform")) | (dist == c("uniform", "normal")) ){
