@@ -279,18 +279,18 @@ regression_model_predict <- function(features){
   # f <- "medv ~ ."
   model <- stats::lm(formula = f , data = train)
 
-  test$predicted.medv <- stats::predict(model, test)
+  test$predicted.medv <- stats::predict( model, test )
+  test$predicted.medv <- round( test$predicted.medv, 1 )
 
   p <- test %>%
-    ggplot2::ggplot( aes(medv,predicted.medv) ) +
-      ggplot2::geom_point( alpha=0.5, show.legend=F ) +
-      ggplot2::stat_smooth( aes(colour='black'), show.legend=F ) +
-      ggplot2::xlab('Actual value of medv') +
-      ggplot2::ylab('Predicted value of medv')+
-      ggplot2::theme_bw()
+    ggplot2::ggplot( aes(medv, predicted.medv) ) +
+      ggplot2::geom_point( alpha=0.4, show.legend=F ) +
+      ggplot2::geom_smooth( show.legend=F ) +
+      ggplot2::xlab('Actual Prices') +
+      ggplot2::ylab('Predicted Prices')+
+      ggplot2::theme_light()
 
   m <- plotly::ggplotly(p)
-
   htmlwidgets::saveWidget(m, "mymap.html", selfcontained = F)
 }
 
