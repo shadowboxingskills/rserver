@@ -38,6 +38,10 @@ regression_model <- function(n, dist=c("normal", "uniform")){
   dist <- match.arg(dist)
   stopifnot(n < 1e6)
 
+  if( (dist == c("normal", "uniform")) | (dist == c("uniform", "normal")) ){
+    graphics::hist(stats::rnorm(n), main="uniform + normal")
+  }
+
   if(dist == "normal"){
     graphics::hist(stats::rnorm(n), main="SG")
   }
