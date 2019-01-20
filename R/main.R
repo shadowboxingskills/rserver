@@ -110,6 +110,7 @@ regression_model_correlation_plot <- function(features){
   } else {
     regVar <- features
   }
+  # add the target (medv)
   regVar <- c(regVar, "medv")
   x = df[, regVar]
 
@@ -118,4 +119,87 @@ regression_model_correlation_plot <- function(features){
   #return nothing
   invisible();
 }
+
+
+usethis::use_package("caTools")
+usethis::use_package("dplyr")
+
+#' Multiple Regression example using Boston housing dataset
+#'
+#' This function creates a multiple regression model trained with the Boston housing dataset.
+#'
+#' @export
+#' @param features one of "normal" or "uniform".
+regression_model_training <- function(features){
+  require(mlbench) # for BostonHousing data
+  require(caTools) # for sample.split
+  require(dplyr) # for select
+
+  data(BostonHousing)
+  df <- BostonHousing
+
+  set.seed(42)
+  msk <- caTools::sample.split(df, SplitRatio = 3/4)
+  t=sum( msk)  # number of elements in one class
+  f=sum(!msk)  # number of elements in the other class
+  stopifnot( round((t+f)*3/4) == t ) # test ratios
+
+  # test results
+  # print(paste( "All Labels numbers: total=",t+f,", train=",t,", test=",f,", ratio=", t/(t+f) ) )
+
+  train <- base::subset(df, msk==T)
+  test <- base::subset(df, msk==F)
+
+  # train <- dplyr::select(train,-b)
+  # test <- dplyr::select(test,-b)
+
+  f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
+  model <- stats::lm(formula = f , data = train)
+  summary(model)
+
+  #return nothing
+  invisible();
+}
+
+#' Multiple Regression example using Boston housing dataset
+#'
+#' This function creates a multiple regression model trained with the Boston housing dataset.
+#'
+#' @export
+#' @param features one of "normal" or "uniform".
+regression_model_plot_residuals <- function(features){
+  require(mlbench) # for BostonHousing data
+  require(caTools) # for sample.split
+  require(dplyr) # for select
+
+  data(BostonHousing)
+  df <- BostonHousing
+
+  set.seed(42)
+  msk <- caTools::sample.split(df, SplitRatio = 3/4)
+  t=sum( msk)  # number of elements in one class
+  f=sum(!msk)  # number of elements in the other class
+  stopifnot( round((t+f)*3/4) == t ) # test ratios
+
+  # test results
+  # print(paste( "All Labels numbers: total=",t+f,", train=",t,", test=",f,", ratio=", t/(t+f) ) )
+
+  train <- base::subset(df, msk==T)
+  test <- base::subset(df, msk==F)
+
+  # train <- dplyr::select(train,-b)
+  # test <- dplyr::select(test,-b)
+
+  f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
+  model <- stats::lm(formula = f , data = train)
+  # summary(model)
+
+  par(mfrow = c(2, 2))  # Split the plotting panel into a 2 x 2 grid
+  plot(model)
+  # par(mfrow = c(1, 1))  # Return plotting panel to 1 section
+
+  #return nothing
+  invisible();
+}
+
 
