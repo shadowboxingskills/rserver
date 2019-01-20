@@ -43,7 +43,7 @@ regression_model <- function(n, dist){
                     "dist[2] = ", dist[2], ". ",
                     "length(dist) = ", length(dist))
 
-  if ( dist == "uniform,normal" ) {
+  if ( (dist[1] == "uniform") && (dist[2] == "normal") ) {
     graphics::hist(stats::rnorm(n), main="uniform + normal")
   }
 
