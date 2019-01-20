@@ -247,6 +247,7 @@ regression_model_plot_residuals_distribution <- function(features){
 
 usethis::use_package("plotly")
 usethis::use_package("magrittr")
+usethis::use_package("htmlwidgets")
 
 #' Multiple Regression example using Boston housing dataset
 #'
@@ -260,6 +261,7 @@ regression_model_predict <- function(features){
   require(plotly, quietly = T, warn.conflicts = T) # for ggplotly
   require(ggplot2, quietly = T, warn.conflicts = T) # for ggplot
   require(magrittr, quietly = T, warn.conflicts = T) # for pipes
+  require(htmlwidgets, quietly = T, warn.conflicts = T) # for saveWidget
 
   data(BostonHousing)
   df <- BostonHousing
@@ -287,11 +289,9 @@ regression_model_predict <- function(features){
       ggplot2::ylab('Predicted value of medv')+
       ggplot2::theme_bw()
 
-  plotly::ggplotly(p)
-  # print(g)
+  m <- plotly::ggplotly(p)
 
-  #return nothing
-  # invisible();
+  htmlwidgets::saveWidget(m, "mymap.html", selfcontained = F)
 }
 
 
