@@ -86,7 +86,7 @@ regression_model <- function(n, features){
   # }
 
   #return nothing
-  invisible();
+  # invisible();
 }
 
 
