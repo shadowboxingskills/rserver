@@ -155,10 +155,10 @@ regression_model_training <- function(features){
 
   f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
   model <- stats::lm(formula = f , data = train)
-  summary(model)
+  print(summary(model))
 
   # return nothing
-  # invisible();
+  invisible();
 }
 
 #' Multiple Regression example using Boston housing dataset
