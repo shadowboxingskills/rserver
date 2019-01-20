@@ -31,11 +31,7 @@ usethis::use_package("caTools")
 #' @export
 #' @param n numer of random values
 #' @param dist one of "normal" or "uniform".
-<<<<<<< HEAD
 regression_model <- function(n, dist=c("normal", "uniform", c("normal", "uniform"))){
-=======
-regression_model <- function(n, dist){
->>>>>>> b199d48ae323416203d46fb8982b3002ad198da0
   #require(caTools)
 
   #input validation
