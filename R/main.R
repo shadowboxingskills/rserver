@@ -155,7 +155,8 @@ regression_model_training <- function(features){
 
   f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
   model <- stats::lm(formula = f , data = train)
-  print(summary(model))
+
+  print( summary(model) )
 
   # return nothing
   invisible();
@@ -242,5 +243,98 @@ regression_model_plot_residuals_distribution <- function(features){
   #return nothing
   invisible();
 }
+
+
+usethis::use_package("plotly")
+usethis::use_package("magrittr")
+
+#' Multiple Regression example using Boston housing dataset
+#'
+#' This function creates a multiple regression model trained with the Boston housing dataset.
+#'
+#' @export
+#' @param features one of "normal" or "uniform".
+regression_model_predict <- function(features){
+  require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
+  require(caTools, quietly = T, warn.conflicts = T) # for sample.split
+  require(plotly, quietly = T, warn.conflicts = T) # for ggplotly
+  require(ggplot2, quietly = T, warn.conflicts = T) # for ggplot
+  require(magrittr, quietly = T, warn.conflicts = T) # for pipes
+
+  data(BostonHousing)
+  df <- BostonHousing
+
+  set.seed(42)
+  msk <- caTools::sample.split(df, SplitRatio = 3/4)
+  t=sum( msk)  # number of elements in one class
+  f=sum(!msk)  # number of elements in the other class
+  stopifnot( round((t+f)*3/4) == t ) # test ratios
+
+  train <- base::subset(df, msk==T)
+  test <- base::subset(df, msk==F)
+
+  f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
+  # f <- "medv ~ ."
+  model <- stats::lm(formula = f , data = train)
+
+  test$predicted.medv <- stats::predict(model, test)
+
+  p <- test %>%
+    ggplot2::ggplot( aes(medv,predicted.medv) ) +
+      ggplot2::geom_point( alpha=0.5, show.legend=F ) +
+      ggplot2::stat_smooth( aes(colour='black'), show.legend=F ) +
+      ggplot2::xlab('Actual value of medv') +
+      ggplot2::ylab('Predicted value of medv')+
+      ggplot2::theme_bw()
+
+  g <- plotly::ggplotly(p)
+  print(g)
+
+  #return nothing
+  invisible();
+}
+
+
+#' Multiple Regression example using Boston housing dataset
+#'
+#' This function creates a multiple regression model trained with the Boston housing dataset.
+#'
+#' @export
+#' @param features one of "normal" or "uniform".
+regression_model_RMSE <- function(features){
+  require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
+  require(caTools, quietly = T, warn.conflicts = T) # for sample.split
+
+  data(BostonHousing)
+  df <- BostonHousing
+
+  set.seed(42)
+  msk <- caTools::sample.split(df, SplitRatio = 3/4)
+  t=sum( msk)  # number of elements in one class
+  f=sum(!msk)  # number of elements in the other class
+  stopifnot( round((t+f)*3/4) == t ) # test ratios
+
+  train <- base::subset(df, msk==T)
+  test <- base::subset(df, msk==F)
+
+  f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
+  # f <- "medv ~ ."
+  model <- stats::lm(formula = f , data = train)
+
+  test$predicted.medv <- stats::predict(model, test)
+
+  error <- test$medvv - test$predicted.medv
+
+  # calculate the model Root Mean Square Error (RMSE)
+  rmse <- sqrt( mean(error)^2 )
+
+  print( rmse )
+
+  #return nothing
+  invisible();
+}
+
+
+
 
 

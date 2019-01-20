@@ -17,4 +17,6 @@ Imports:
     lattice,
     corrplot,
     dplyr,
-    ggplot2
+    ggplot2,
+    plotly,
+    magrittr
