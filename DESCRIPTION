@@ -11,4 +11,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    caTools
+    caTools,
+    mlbench,
+    caret,
+    lattice
