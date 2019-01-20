@@ -158,7 +158,7 @@ regression_model_training <- function(features){
   print(summary(model))
 
   # return nothing
-  invisible();
+  # invisible();
 }
 
 #' Multiple Regression example using Boston housing dataset
