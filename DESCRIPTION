@@ -16,4 +16,5 @@ Imports:
     caret,
     lattice,
     corrplot,
-    dplyr
+    dplyr,
+    ggplot2

@@ -203,3 +203,43 @@ regression_model_plot_residuals <- function(features){
 }
 
 
+usethis::use_package("ggplot2")
+
+#' Multiple Regression example using Boston housing dataset
+#'
+#' This function creates a multiple regression model trained with the Boston housing dataset.
+#'
+#' @export
+#' @param features one of "normal" or "uniform".
+regression_model_plot_residuals_distribution <- function(features){
+  require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
+  require(caTools, quietly = T, warn.conflicts = T) # for sample.split
+  require(ggplot2, quietly = T, warn.conflicts = T) # for ggplot
+
+  data(BostonHousing)
+  df <- BostonHousing
+
+  set.seed(42)
+  msk <- caTools::sample.split(df, SplitRatio = 3/4)
+  t=sum( msk)  # number of elements in one class
+  f=sum(!msk)  # number of elements in the other class
+  stopifnot( round((t+f)*3/4) == t ) # test ratios
+
+  train <- base::subset(df, msk==T)
+  test <- base::subset(df, msk==F)
+
+  f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
+  # f <- "medv ~ ."
+  model <- stats::lm(formula = f , data = train)
+
+  residuals <- residuals(model)
+  residuals <- as.data.frame(residuals)
+
+  ggplot2::ggplot( residuals, aes(residuals) ) +
+    ggplot2::geom_histogram( fill='red', alpha=0.4, binwidth=1 )
+
+  #return nothing
+  invisible();
+}
+
+
