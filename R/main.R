@@ -31,23 +31,23 @@ usethis::use_package("caTools")
 #' @export
 #' @param n numer of random values
 #' @param dist one of "normal" or "uniform".
-regression_model <- function(n, dist=c("normal", "uniform")){
+regression_model <- function(n, dist){
   #require(caTools)
 
   #input validation
   dist <- match.arg(dist, several.ok = T)
   stopifnot(n < 1e6)
 
-  if( (dist == c("normal", "uniform")) || (dist == c("uniform", "normal")) ){
+  if( dist == c("uniform", "normal") ){
     graphics::hist(stats::rnorm(n), main="uniform + normal")
   }
 
   if(dist == "normal"){
-    graphics::hist(stats::rnorm(n), main="SG")
+    graphics::hist(stats::rnorm(n), main="normal")
   }
 
   if(dist == "uniform"){
-    graphics::hist(stats::runif(n))
+    graphics::hist(stats::runif(n), main="uniform")
   }
 
   #return nothing
