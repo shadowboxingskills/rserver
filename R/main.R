@@ -149,9 +149,6 @@ regression_model_training <- function(features){
   train <- base::subset(df, msk==T)
   test <- base::subset(df, msk==F)
 
-  # train <- dplyr::select(train,-b)
-  # test <- dplyr::select(test,-b)
-
   f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
   model <- stats::lm(formula = f , data = train)
 
@@ -185,9 +182,6 @@ regression_model_plot_residuals <- function(features){
 
   train <- base::subset(df, msk==T)
   test <- base::subset(df, msk==F)
-
-  # train <- dplyr::select(train,-b)
-  # test <- dplyr::select(test,-b)
 
   f <- paste0( "medv ~ ",  paste(features, collapse = " + ") )
   model <- stats::lm(formula = f , data = train)
