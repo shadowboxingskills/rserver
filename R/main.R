@@ -294,7 +294,7 @@ regression_model_predict <- function(features){
 #'
 #' @export
 #' @param features one of "normal" or "uniform".
-regression_model_RMSD <- function(features){
+regression_model_RMSE <- function(features){
   require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
   require(caTools, quietly = T, warn.conflicts = T) # for sample.split
   require(caret, quietly = T, warn.conflicts = T) # for postResample
@@ -317,16 +317,15 @@ regression_model_RMSD <- function(features){
 
   test$predicted.medv <- stats::predict(model, test)
 
-  error <- test$medv - test$predicted.medv
-
   # calculate the model Root Mean Square Error (RMSD)
-  mse <- mean(error)^2
-  rmsd <- sqrt( mse )
+  # error <- test$medv - test$predicted.medv
+  # mse <- mean(error)^2
+  # rmsd <- sqrt( mse )
 
   r <- caret::postResample(pred = test$predicted.medv, obs = test$medv)
 
-  print("RMSD manually calculated: ")
-  print( round(rmsd, 2) )
+  # print("RMSD manually calculated: ")
+  # print( round(rmsd, 2) )
   print("Results from the caret library: ")
   print( round(r, 2) )
 
