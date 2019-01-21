@@ -297,6 +297,7 @@ regression_model_predict <- function(features){
 regression_model_RMSD <- function(features){
   require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
   require(caTools, quietly = T, warn.conflicts = T) # for sample.split
+  require(caret, quietly = T, warn.conflicts = T) # for postResample
 
   data(BostonHousing)
   df <- BostonHousing
@@ -322,7 +323,12 @@ regression_model_RMSD <- function(features){
   mse <- mean(error)^2
   rmsd <- sqrt( mse )
 
+  r <- caret::postResample(pred = test$predicted.medv, obs = test$medv)
+
+  print("RMSD manually calculated: ")
   print( round(rmsd, 2) )
+  print("Results from the caret library: ")
+  print( round(r, 2) )
 
   #return nothing
   invisible();
