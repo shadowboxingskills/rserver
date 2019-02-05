@@ -348,7 +348,7 @@ usethis::use_package("rglwidget")
 regression_residuals_test <- function(features){
   require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
   require(car, quietly = T, warn.conflicts = T) # for scatter3d
-  require(rgl, quietly = T, warn.conflicts = T) # for scatter3d / rgl
+  #require(rgl, quietly = T, warn.conflicts = T) # for scatter3d / rgl
   require(htmltools, quietly = T, warn.conflicts = T) # for browsable
   require(rglwidget, quietly = T, warn.conflicts = T) # for rglwidget
 
