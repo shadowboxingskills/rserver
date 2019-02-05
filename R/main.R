@@ -345,7 +345,7 @@ usethis::use_package("rglwidget")
 #'
 #' @export
 #' @param features one of "normal" or "uniform".
-regression_model_predict <- function(features){
+regression_rgl_test <- function(features){
   require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
   require(car, quietly = T, warn.conflicts = T) # for scatter3d
   require(rgl, quietly = T, warn.conflicts = T) # for scatter3d / rgl
