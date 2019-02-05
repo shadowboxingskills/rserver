@@ -337,7 +337,7 @@ regression_model_RMSE <- function(features){
 usethis::use_package("car")
 usethis::use_package("rgl")
 usethis::use_package("htmltools")
-usethis::use_package("rglwidget")
+#usethis::use_package("rglwidget")
 
 #' Multiple Regression example using Boston housing dataset
 #'
@@ -350,15 +350,17 @@ regression_residuals_test <- function(features){
   require(car, quietly = T, warn.conflicts = T) # for scatter3d
   require(rgl, quietly = T, warn.conflicts = T) # for scatter3d / rgl
   require(htmltools, quietly = T, warn.conflicts = T) # for browsable
-  require(rglwidget, quietly = T, warn.conflicts = T) # for rglwidget
+  #require(rglwidget, quietly = T, warn.conflicts = T) # for rglwidget
+  require(htmlwidgets, quietly = T, warn.conflicts = T) # for saveWidget
+
 
   data(BostonHousing)
   df <- BostonHousing
 
-  s <- car::scatter3d(medv ~ rm + lstat, data=df)
+  car::scatter3d(medv ~ rm + lstat, data=df)
 
   p <- htmltools::browsable(tagList(
-        rglwidget::rglwidget(elementId = 's3d')#, height = '200')
+        rgl::rglwidget(elementId = 's3d')#, height = '200')
       ))
 
   htmlwidgets::saveWidget(p, "mymap2.html", selfcontained = F)
