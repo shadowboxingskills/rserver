@@ -334,6 +334,35 @@ regression_model_RMSE <- function(features){
 }
 
 
+usethis::use_package("car")
+usethis::use_package("rgl")
+usethis::use_package("htmltools")
+usethis::use_package("rglwidget")
+
+#' Multiple Regression example using Boston housing dataset
+#'
+#' This function creates a multiple regression model trained with the Boston housing dataset.
+#'
+#' @export
+#' @param features one of "normal" or "uniform".
+regression_model_predict <- function(features){
+  require(mlbench, quietly = T, warn.conflicts = T) # for BostonHousing data
+  require(car, quietly = T, warn.conflicts = T) # for scatter3d
+  require(rgl, quietly = T, warn.conflicts = T) # for scatter3d / rgl
+  require(htmltools, quietly = T, warn.conflicts = T) # for browsable
+  require(rglwidget, quietly = T, warn.conflicts = T) # for rglwidget
+
+  data(BostonHousing)
+  df <- BostonHousing
+
+  car::scatter3d(medv ~ rm + lstat, data=df)
+
+  p <- htmltools::browsable(tagList(
+        rglwidget::rglwidget(elementId = 's3d')#, height = '200')
+      ))
+
+  htmlwidgets::saveWidget(p, "mymap.html", selfcontained = F)
+}
 
 
 

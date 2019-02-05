@@ -20,4 +20,8 @@ Imports:
     ggplot2,
     plotly,
     magrittr,
-    htmlwidgets
+    htmlwidgets,
+    car,
+    rgl,
+    htmltools,
+    rglwidget
