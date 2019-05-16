@@ -349,13 +349,6 @@ make_map1 <- function(title = "This is a test", lat, lng){
   m <- leaflet::addTiles(m)
   m <- leaflet::addMarkers(m, lng = as.numeric(lng), lat = as.numeric(lat), popup = title)
   htmlwidgets::saveWidget(m, "mymap1.html", selfcontained = F)
-
-  # df=data.frame(country=c("US", "GB", "BR"),
-  #               val1=c(10,13,14),
-  #               val2=c(23,12,32))
-  # cc <- googleVis::gvisColumnChart(df)
-  # print(cc, 'chart', file='mymap2.html')
-
 }
 
 
