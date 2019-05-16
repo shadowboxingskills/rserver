@@ -348,7 +348,7 @@ make_map1 <- function(title = "This is a test", lat, lng){
   m <- leaflet::leaflet()
   m <- leaflet::addTiles(m)
   m <- leaflet::addMarkers(m, lng = as.numeric(lng), lat = as.numeric(lat), popup = title)
-  htmlwidgets::saveWidget(m, "mymap1.html", selfcontained = F)
+  htmlwidgets::saveWidget(m, "mymap1.html", selfcontained = T)
 }
 
 
