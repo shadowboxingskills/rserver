@@ -24,4 +24,5 @@ Imports:
     car,
     rgl,
     htmltools,
-    rglwidget
+    rglwidget,
+    leaflet
