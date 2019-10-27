@@ -24,7 +24,7 @@ randomplot <- function(n, dist=c("normal", "uniform", "test")){
   }
 
   if(dist == "test"){
-    dat <- data.frame(cond = factor(rep(c("A","B"), each=200)), rating = c(rnorm(200),rnorm(200, mean=.8)))
+    dat <- data.frame(cond = factor(rep(c("A","B"), each=n)), rating = c(rnorm(n),rnorm(n, mean=.8)))
     # Histogram overlaid with kernel density curve
     ggplot2::ggplot(dat, aes(x=rating)) +
       ggplot2::geom_histogram(aes(y=..density..),      # Histogram with density instead of count on y-axis
