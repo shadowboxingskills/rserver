@@ -1,4 +1,4 @@
-usethis::use_package("ggplot2")
+usethis::use_package("MASS")
 
 #' Make a random plot
 #'
@@ -8,7 +8,7 @@ usethis::use_package("ggplot2")
 #' @param n numer of random values
 #' @param dist one of "normal" or "uniform".
 randomplot <- function(n, dist=c("normal", "uniform", "test")){
-  require(ggplot2, quietly = T, warn.conflicts = T)
+  require(MASS, quietly = T, warn.conflicts = T)
 
   #input validation
   dist <- match.arg(dist)
@@ -24,13 +24,10 @@ randomplot <- function(n, dist=c("normal", "uniform", "test")){
   }
 
   if(dist == "test"){
-    dat <- data.frame(cond = factor(rep(c("A","B"), each=n)), rating = c(rnorm(n),rnorm(n, mean=.8)))
-    # Histogram overlaid with kernel density curve
-    ggplot2::ggplot(dat, aes(x=rating)) +
-      ggplot2::geom_histogram(aes(y=..density..),      # Histogram with density instead of count on y-axis
-                     binwidth=.5,
-                     colour="black", fill="white") +
-      ggplot2::geom_density(alpha=.2, fill="#FF6666")  # Overlay with transparent density plot
+    my_data <- stats::rnorm(n, mean=1, sd=0.45)      # unkonwn distribution parameters
+    fit <- MASS::fitdistr(my_data, densfun="normal")  # we assume my_data ~ Normal(?,?)
+    graphics::hist(my_data, pch=20, prob=T, main="")
+    graphics::curve(stats::dnorm(x, fit$estimate[1], fit$estimate[2]), col="red", lwd=2, add=T)
   }
 
   #return nothing

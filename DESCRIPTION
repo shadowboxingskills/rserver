@@ -25,4 +25,5 @@ Imports:
     rgl,
     htmltools,
     rglwidget,
-    leaflet
+    leaflet,
+    MASS
