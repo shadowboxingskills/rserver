@@ -378,7 +378,24 @@ plot_stock <- function(){
   period_nb_months <- 3
   period_subset <- paste0('last ', period_nb_months, ' months')
   s <- quantmod::getSymbols(ticker, src="yahoo", auto.assign = F)
-  quantmod::chartSeries(AAPL, subset=period_subset, theme=chartTheme('white'))
+  quantmod::chartSeries(s, subset=period_subset, theme=chartTheme('white'), name=ticker)
+}
+
+usethis::use_package("MASS")
+usethis::use_package("fitdistrplus")
+
+demo_fit_dist <- function(){
+  require(MASS)
+  require(fitdistrplus)
+
+  data(groundbeef)
+  serving <- groundbeef$serving
+  fitg <- fitdistrplus::fitdist(serving, "norm")
+  s <- summary(fitg)
+  mean <- s$estimate[1]
+  sd <- s$estimate[2]
+
+  fitdistrplus::denscomp(fitg, demp=T, addlegend=T)
 }
 
 

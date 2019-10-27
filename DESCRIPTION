@@ -27,4 +27,5 @@ Imports:
     rglwidget,
     leaflet,
     MASS,
-    quantmod
+    quantmod,
+    fitdistrplus
