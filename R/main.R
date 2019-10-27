@@ -26,7 +26,7 @@ randomplot <- function(n, dist=c("normal", "uniform", "test")){
   if(dist == "test"){
     my_data <- stats::rnorm(n, mean=1, sd=0.45)      # unkonwn distribution parameters
     fit <- MASS::fitdistr(my_data, densfun="normal")  # we assume my_data ~ Normal(?,?)
-    graphics::hist(my_data, prob=T, main="")
+    graphics::hist(my_data, pch=20, breaks=25, prob=T, main=main)
     graphics::curve(stats::dnorm(x, fit$estimate[1], fit$estimate[2]), col="red", lwd=2, add=T)
   }
 
