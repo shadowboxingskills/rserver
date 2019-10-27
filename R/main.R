@@ -1,3 +1,5 @@
+usethis::use_package("ggplot2")
+
 #' Make a random plot
 #'
 #' This function creates a random histogram plot.
@@ -6,16 +8,29 @@
 #' @param n numer of random values
 #' @param dist one of "normal" or "uniform".
 randomplot <- function(n, dist=c("normal", "uniform")){
+  require(ggplot2, quietly = T, warn.conflicts = T)
+
   #input validation
   dist <- match.arg(dist)
   stopifnot(n < 1e6)
+  main <- "SG"
 
   if(dist == "normal"){
-    graphics::hist(stats::rnorm(n), main="SG")
+    graphics::hist(stats::rnorm(n), main=main)
   }
 
   if(dist == "uniform"){
-    graphics::hist(stats::runif(n))
+    graphics::hist(stats::runif(n), main=main)
+  }
+
+  if(dist == "test"){
+    dat <- data.frame(cond = factor(rep(c("A","B"), each=200)), rating = c(rnorm(200),rnorm(200, mean=.8)))
+    # Histogram overlaid with kernel density curve
+    ggplot2::ggplot(dat, aes(x=rating)) +
+      geom_histogram(aes(y=..density..),      # Histogram with density instead of count on y-axis
+                     binwidth=.5,
+                     colour="black", fill="white") +
+      geom_density(alpha=.2, fill="#FF6666")  # Overlay with transparent density plot
   }
 
   #return nothing
