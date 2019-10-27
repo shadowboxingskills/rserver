@@ -34,7 +34,7 @@ randomplot <- function(n, dist=c("normal", "uniform", "test")){
   }
 
   #return nothing
-  #invisible();
+  invisible();
 }
 
 usethis::use_package("mlbench")
