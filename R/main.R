@@ -7,7 +7,7 @@ usethis::use_package("ggplot2")
 #' @export
 #' @param n numer of random values
 #' @param dist one of "normal" or "uniform".
-randomplot <- function(n, dist=c("normal", "uniform")){
+randomplot <- function(n, dist=c("normal", "uniform", "test")){
   require(ggplot2, quietly = T, warn.conflicts = T)
 
   #input validation
