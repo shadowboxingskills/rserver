@@ -24,8 +24,8 @@ randomplot <- function(n, dist=c("normal", "uniform", "test")){
   }
 
   if(dist == "test"){
-    my_data <- stats::rnorm(n, mean=1, sd=0.45)      # unkonwn distribution parameters
-    fit <- MASS::fitdistr(my_data, densfun="normal")  # we assume my_data ~ Normal(?,?)
+    my_data <- stats::rnorm(n, mean=1, sd=0.45)
+    fit <- MASS::fitdistr(my_data, densfun="normal")
     graphics::hist(my_data, pch=20, breaks=25, prob=T, main=main)
     graphics::curve(stats::dnorm(x, fit$estimate[1], fit$estimate[2]), col="red", lwd=2, add=T)
   }
@@ -363,5 +363,22 @@ make_map1 <- function(title = "This is a test", lat, lng){
   htmlwidgets::saveWidget(m, "mymap1.html", selfcontained = T)
 }
 
+usethis::use_package("quantmod")
+
+#' Multiple Regression example using Boston housing dataset
+#'
+#' This function creates a multiple regression model trained with the Boston housing dataset.
+#'
+#' @export
+#' @param features one of "normal" or "uniform".
+plot_stock <- function(){
+  require(quantmod, quietly = T, warn.conflicts = T)
+
+  ticker <- "AAPL"
+  period_nb_months <- 3
+  period_subset <- paste0('last ', period_nb_months, ' months')
+  s <- quantmod::getSymbols(ticker, src="yahoo", auto.assign = F)
+  quantmod::chartSeries(AAPL, subset=period_subset, theme=chartTheme('white'))
+}
 
 
