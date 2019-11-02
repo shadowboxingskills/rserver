@@ -371,14 +371,18 @@ usethis::use_package("quantmod")
 #'
 #' @export
 #' @param features one of "normal" or "uniform".
-plot_stock <- function(ticker, nbmonths, theme){
+plot_stock <- function(ticker, nbmonths, theme, bb){
   require(quantmod, quietly = T, warn.conflicts = T)
 
-  # ticker <- "AAPL"
   period_nb_months <- nbmonths
   period_subset <- paste0('last ', period_nb_months, ' months')
+  if ( bb == 'true' ) {
+    indicators <- "addVo();addBBands()"
+  } else {
+    indicators <- "addVo()"
+  }
   s <- quantmod::getSymbols(ticker, src="yahoo", auto.assign = F)
-  quantmod::chartSeries(s, subset=period_subset, theme=chartTheme(theme), name=ticker)
+  quantmod::chartSeries(s, subset=period_subset, theme=chartTheme(theme), name=ticker, TA=indicators)
 }
 
 usethis::use_package("MASS")
