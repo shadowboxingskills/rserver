@@ -371,12 +371,12 @@ usethis::use_package("quantmod")
 #'
 #' @export
 #' @param features one of "normal" or "uniform".
-plot_stock <- function(ticker, nbmonths, theme, bb){
+plot_stock <- function(ticker, nbmonths, theme, BollingerBands){
   require(quantmod, quietly = T, warn.conflicts = T)
 
   period_nb_months <- nbmonths
   period_subset <- paste0('last ', period_nb_months, ' months')
-  if ( bb == 'true' ) {
+  if ( BollingerBands == 'with Bollinger' ) {
     indicators <- "addVo();addBBands()"
   } else {
     indicators <- "addVo()"
