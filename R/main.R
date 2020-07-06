@@ -1,12 +1,6 @@
 usethis::use_package("MASS")
 
 #' Make a random plot
-#'
-#' This function creates a random histogram plot.
-#'
-#' @export
-#' @param n number of random values
-#' @param dist one of "normal" or "uniform".
 randomplot <- function(n, dist=c("normal", "uniform", "test")){
   require(MASS, quietly = T, warn.conflicts = T)
 
