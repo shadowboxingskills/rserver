@@ -1,6 +1,11 @@
 usethis::use_package("MASS")
 
-#' Make a random plot
+#' Multiple Regression example using Boston housing dataset
+#'
+#' This function creates a multiple regression model trained with the Boston housing dataset.
+#'
+#' @export
+#' @param features one of "normal" or "uniform".
 randomplot <- function(n, dist=c("normal", "uniform", "test")){
   require(MASS, quietly = T, warn.conflicts = T)
 
