@@ -11,21 +11,4 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    caTools,
-    mlbench,
-    caret,
-    lattice,
-    corrplot,
-    dplyr,
-    ggplot2,
-    plotly,
-    magrittr,
-    htmlwidgets,
-    car,
-    rgl,
-    htmltools,
-    rglwidget,
-    leaflet,
-    MASS,
-    quantmod,
-    fitdistrplus
+    quantmod
